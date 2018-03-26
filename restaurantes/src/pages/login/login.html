@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page6">
+  <form id="login-form2">
+    <ion-item id="login-input5">
+      <ion-label>E-mail</ion-label><ion-input type="text" [(ngModel)]="usuario.email" name="email" placeholder=""></ion-input>
+    </ion-item>
+    <ion-item id="login-input6">
+      <ion-label>Senha</ion-label><ion-input type="password" [(ngModel)]="usuario.password" name="password" placeholder=""></ion-input>
+    </ion-item>
+  </form>
+  <button id="login-button2" ion-button color="positive" block (click)="submit()">
+    Fazer Login
+  </button>
+</ion-content>

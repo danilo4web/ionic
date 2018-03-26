@@ -51,9 +51,9 @@ export class LoginPage {
         var res = this.data.response.split("|");
 
         if(res[1] == "sucesso"){
-          sessionStorage.setItem('usuarioId', res[0]);
-          sessionStorage.setItem('usuarioLogado', this.usuario.email);
-          sessionStorage.setItem('usuarioNome', res[2]);
+          sessionStorage.setItem('usuarioId', res[0].trim());
+          sessionStorage.setItem('usuarioLogado', this.usuario.email.trim());
+          sessionStorage.setItem('usuarioNome', res[2].trim());
           sessionStorage.setItem('flagLogado', 'sim');
           
           this.navCtrl.push(RestaurantesPage)

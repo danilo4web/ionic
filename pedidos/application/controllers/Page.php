@@ -1,5 +1,8 @@
+<?php header('Access-Control-Allow-Origin: *'); ?>
+
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 
 class Page extends CI_Controller {
 
@@ -212,10 +215,10 @@ class Page extends CI_Controller {
     {
     	foreach ($request as $key => $val) 
     	{
-				if($key == "cardapioId"){
+				if($key == "cardapio_id"){
 		    	$cardapio_id = $val;
 		    }else
-		  	if($key == "usuarioId"){
+		  	if($key == "usuario_id"){
 		    	$usuario_id = $val;
 		    }else
 				if($key == "valor"){

@@ -24,7 +24,12 @@ export class PedidosPage {
     private _alertCtrl: AlertController,
     public navParams: NavParams
   ){
-    this.url = "http://pedidos.localhost/index.php/page/get_ionic_pedidos_json/" + sessionStorage.getItem('usuarioId');
+
+
+    console.log(sessionStorage.getItem('usuarioId'));
+    this.url = "http://pedidos.localhost/index.php/page/get_ionic_pedidos_json/";
+    this.url = this.url + sessionStorage.getItem('usuarioId');
+
 
     console.log(this.url);
   }
@@ -38,6 +43,7 @@ export class PedidosPage {
     let loader = this._loadingCtrl.create({
         content: 'Buscando pedidos. Aguarde...'
     });
+
     loader.present();
 
     this._http

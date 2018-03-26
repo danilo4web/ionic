@@ -32,6 +32,8 @@ export class CarrinhoPage {
     console.log("Carrinho - constructor");
     console.log(this.pedido);
     console.log(this.pedido.cardapio);
+    console.log(this.pedido.usuario);
+    console.log("=====================");
     console.log("=====================");
 
     this.data = {};
@@ -56,6 +58,8 @@ export class CarrinhoPage {
       email: this.pedido.usuario.email,
       observacao: this.pedido.observacao
     });
+
+    console.log(data);
 
     this.http.post(this.url, data)
     .subscribe(data => {

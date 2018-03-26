@@ -49,7 +49,9 @@ var PedidosPage = /** @class */ (function () {
         this._loadingCtrl = _loadingCtrl;
         this._alertCtrl = _alertCtrl;
         this.navParams = navParams;
-        this.url = "http://pedidos.localhost/index.php/page/get_ionic_pedidos_json/" + sessionStorage.getItem('usuarioId');
+        console.log(sessionStorage.getItem('usuarioId'));
+        this.url = "http://pedidos.localhost/index.php/page/get_ionic_pedidos_json/";
+        this.url = this.url + sessionStorage.getItem('usuarioId');
         console.log(this.url);
     }
     PedidosPage.prototype.ngOnInit = function () {
@@ -86,7 +88,7 @@ var PedidosPage = /** @class */ (function () {
     };
     PedidosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-pedidos',template:/*ion-inline-start:"/servidor/projetos/ionic/restaurantes/src/pages/pedidos/pedidos.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>\n        Meus Pedidos\n      </ion-title>\n    </ion-navbar>\n  </ion-header>\n  <ion-content padding id="page2">\n    <ion-list *ngFor="let pedido of pedidos" id="pedidos-list5">\n      <ion-item color="none" id="pedidos-list-item10">\n        <ion-icon name="restaurant" item-left></ion-icon>\n\n      </ion-item>\n    </ion-list>\n  </ion-content>'/*ion-inline-end:"/servidor/projetos/ionic/restaurantes/src/pages/pedidos/pedidos.html"*/
+            selector: 'page-pedidos',template:/*ion-inline-start:"/servidor/projetos/ionic/restaurantes/src/pages/pedidos/pedidos.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>\n        Meus Pedidos\n      </ion-title>\n    </ion-navbar>\n  </ion-header>\n  <ion-content padding id="page2">\n    <ion-list *ngFor="let pedido of pedidos" id="pedidos-list5">\n      <ion-item color="none" id="pedidos-list-item10">\n        <ion-icon name="restaurant" item-left></ion-icon>\n        Número do peido {‌{ pedido.id }} Valor: R${‌{ pedido.valor }} <br />\n        Taxa de entrega: {‌{ pedido.taxa_entrega}} Prato: {‌{ pedido.cardapio.nome }}\n      </ion-item>\n    </ion-list>\n  </ion-content>'/*ion-inline-end:"/servidor/projetos/ionic/restaurantes/src/pages/pedidos/pedidos.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */],
@@ -770,11 +772,13 @@ var CarrinhoPage = /** @class */ (function () {
         this._alertCtrl = _alertCtrl;
         this.navParams = navParams;
         this.pedido = new __WEBPACK_IMPORTED_MODULE_5__domain_pedido_pedido__["a" /* Pedido */](null, null, null, null, null, null, null, null);
-        this.pedido.usuario = new __WEBPACK_IMPORTED_MODULE_6__domain_usuario_usuario__["a" /* Usuario */](sessionStorage.getItem('usuarioId'), sessionStorage.getItem('usuarioNome'), sessionStorage.getItem('usuarioLogado'), null, sessionStorage.getItem('flagLogado'));
+        this.pedido.usuario = new __WEBPACK_IMPORTED_MODULE_6__domain_usuario_usuario__["a" /* Usuario */](sessionStorage.getItem('usuarioId').trim(), sessionStorage.getItem('usuarioNome'), sessionStorage.getItem('usuarioLogado'), null, sessionStorage.getItem('flagLogado'));
         this.pedido.cardapio = this.navParams.get('CardapioSelecionado');
         console.log("Carrinho - constructor");
         console.log(this.pedido);
         console.log(this.pedido.cardapio);
+        console.log(this.pedido.usuario);
+        console.log("=====================");
         console.log("=====================");
         this.data = {};
         this.data.response = '';
@@ -797,6 +801,7 @@ var CarrinhoPage = /** @class */ (function () {
             email: this.pedido.usuario.email,
             observacao: this.pedido.observacao
         });
+        console.log(data);
         this.http.post(this.url, data)
             .subscribe(function (data) {
             _this.data.response = data._body;

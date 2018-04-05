@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <img src="{{ pathForImage(lastImage) }}" style="width: 100%;" [hidden]="lastImage === null"/>
+  <h3 [hidden]="lastImage !== null">Favor selecionar uma imagem!</h3>
+</ion-content>
+
+<ion-footer>
+    <ion-toobar color="primary">
+      <button ion-button left (click)="PresentActionSheet()">
+        <ion-icon name="camera"></ion-icon>Selecione uma imagem
+      </button>
+      <button ion-button left (click)="uploadImage()">
+        <ion-icon name="cloud-upload"></ion-icon>Salvar no servidor
+      </button>
+    </ion-toobar>
+</ion-footer>

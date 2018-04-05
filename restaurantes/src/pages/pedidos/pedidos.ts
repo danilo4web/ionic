@@ -64,7 +64,7 @@ export class PedidosPage {
                 .create({
                     title: 'Falha na conexão',
                     buttons: [{ text: 'OK estou ciente!'}],
-                    subTitle: "Não foi possÃ­vel obter o cardapio. Tente mais tarde."
+                    subTitle: "Não foi possivel obter o cardapio. Tente mais tarde."
                 }).present();
         });
   }

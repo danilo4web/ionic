@@ -9,6 +9,11 @@ import { GpsPage } from '../pages/gps/gps';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { Camera } from '@ionic-native/camera';
+import { FilePath } from '@ionic-native/file-path';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -29,6 +34,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     File,
+    Transfer, 
+    Camera, 
+    FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

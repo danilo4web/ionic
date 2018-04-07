@@ -151,14 +151,16 @@ class Page extends CI_Controller {
 				}		        
 		 	}
 			$dados = array(
-            'cardapio_id' => 1,
-            'usuario_id' => $usuario_id,
-						'valor' => $valor,
-						'taxa_entrega' => $taxa_entrega,
-						'nome' => $nome,
-            'email' => $email
-      );
-				if($this->db->insert('pedidos', $dados)){
+				'cardapio_id' => 1,
+				'usuario_id' => $usuario_id,
+				'valor' => $valor,
+				'taxa_entrega' => $taxa_entrega,
+				'nome' => $nome,
+				'email' => $email,
+				'observacao' => $observacao
+			);
+	  
+			if($this->db->insert('pedidos', $dados)){
 					$id_pedido = $this->db->insert_id();
 					foreach ($pedidos as $key => $val) 
 					{
@@ -203,14 +205,15 @@ class Page extends CI_Controller {
 		$msg = "";
 		$request = array();
 		$json = file_get_contents('php://input');
-    $request = json_decode($json, true);
-    $cardapio_id = "";
+    	$request = json_decode($json, true);
+    	$cardapio_id = "";
 		$usuario_id = "";
 		$valor = "";
 		$taxa_entrega = "";
 		$nome = "";
-    $email = "";
+    	$email = "";
 		$observacao = "";
+
     if(!empty($request))
     {
     	foreach ($request as $key => $val) 
@@ -241,12 +244,13 @@ class Page extends CI_Controller {
 				}		        
 		 	}
 			$dados = array(
-            'cardapio_id' => $cardapio_id,
-            'usuario_id' => $usuario_id,
-						'valor' => $valor,
-						'taxa_entrega' => $taxa_entrega,
-						'nome' => $nome,
-            'email' => $email
+            	'cardapio_id' => $cardapio_id,
+            	'usuario_id' => $usuario_id,
+				'valor' => $valor,
+				'taxa_entrega' => $taxa_entrega,
+				'nome' => $nome,
+				'email' => $email,
+				'observacao' => $observacao
       );
 				if($this->db->insert('pedidos', $dados)){
 					$msg = "Registro gravado com sucesso";
@@ -458,29 +462,36 @@ class Page extends CI_Controller {
 		}
 		echo json_encode($response);
 	}			
-	public function get_ionic_pedidos_json($id){
-		$pedidos_db = $this->banco->get_pedidos($id);
+	public function get_ionic_pedidos_json($id = 0){
+
 		$response = array();
-		$cardapio = array();
-		foreach($pedidos_db as $res){
-			$pedidos = array();
-			$pedidos["id"] = $res->id;			
-			$cardapios = $this->banco->get_pratos_by_id($res->cardapio_id);
-			foreach($cardapios as $car){
-				$cardapio["id"] = $car->id;
-				$cardapio["nome"] = $car->nome;
-				$cardapio["tipo"] = $car->tipo;
-				$cardapio["ingredientes"] = $car->ingredientes;						
-			}	
-			$pedidos["cardapio"] = $cardapio;
-			$pedidos["usuario"] = $res->usuario_id;
-			$pedidos["valor"] = $res->valor;
-			$pedidos["taxa_entrega"] = "15";
-			$pedidos["email"] = $res->email;
-			array_push($response, $pedidos);
+
+		if($id) {
+			$pedidos_db = $this->banco->get_pedidos($id);
+			
+			$cardapio = array();
+			foreach($pedidos_db as $res){
+				$pedidos = array();
+				$pedidos["id"] = $res->id;			
+				$cardapios = $this->banco->get_pratos_by_id($res->cardapio_id);
+				foreach($cardapios as $car){
+					$cardapio["id"] = $car->id;
+					$cardapio["nome"] = $car->nome;
+					$cardapio["tipo"] = $car->tipo;
+					$cardapio["ingredientes"] = $car->ingredientes;						
+				}	
+				$pedidos["cardapio"] = $cardapio;
+				$pedidos["usuario"] = $res->usuario_id;
+				$pedidos["valor"] = $res->valor;
+				$pedidos["taxa_entrega"] = "15";
+				$pedidos["email"] = $res->email;
+				array_push($response, $pedidos);
+				
+			}
 			
 		}
-		echo json_encode($response);
+
+		echo json_encode($response);		
 	}	
  	public function get_restaurantes_json_new(){
 		$restaurantes = $this->banco->get_restaurantes();

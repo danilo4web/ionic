@@ -12,8 +12,12 @@
     <ion-list *ngFor="let pedido of pedidos" id="pedidos-list5">
       <ion-item color="none" id="pedidos-list-item10">
         <ion-icon name="restaurant" item-left></ion-icon>
-        Número do pedido {‌{ pedido.id }} Valor: R${‌{ pedido.valor }} <br />
-        Taxa de entrega: {‌{ pedido.taxa_entrega }} Prato: {‌{ pedido.cardapio.nome }}
+        <p style="margin-top:0px; color:#000000; border-bottom: 1px solid #EFEFEF;">
+          <strong>‌‌‌‌‌
+            Número do pedido: {{ pedido.id }} Valor: {{ pedido.valor }}
+            Taxa de entrega: {{ pedido.taxa_entrega }} Prato: {{ pedido.cardapio.nome }}
+          </strong>
+        </p>
       </ion-item>
     </ion-list>
   </ion-content>

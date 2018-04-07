@@ -37,6 +37,10 @@ export class LoginPage {
   submit(){
     var link = 'http://pedidos.localhost/index.php/page/login_ionic';
 
+
+    console.log(this.usuario.email);
+    console.log(this.usuario.password);
+
     var data = JSON.stringify({ email: this.usuario.email, password: this.usuario.password });
     
     // Iniciando a conexão HTTP para cadastro via JSON
